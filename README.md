@@ -13,7 +13,7 @@ Things you may want to cover:
 
 * Database creation
 ```
->> 
+>> ./bin/rails db:create db:migrate
 ```
 
 * Database initialization

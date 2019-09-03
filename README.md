@@ -14,6 +14,11 @@ Things you may want to cover:
 * Database creation
 
 * Database initialization
+```
+>> docker run --name dev-postgres -p 15432:5432 -e POSTGRES_USER=dev -e POSTGRES_PASSWORD=postgres -d postgres:11
+
+>> psql -h localhost -U dev-postgres
+```
 
 * How to run the test suite
 

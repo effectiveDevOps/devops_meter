@@ -50,14 +50,22 @@ export default {
   },
   created: function(){
     // debug data
-    for (let index = 0; index < 13; index++) {
-      this.groups.push(this.groups[0]); 
-    }
-
-    for (let index = 0; index < this.groups.length; index++) {
-      Object.assign(this.groups[index],{options: this.options});
-    }
-    console.log(this.groups)
+    let _this = this;
+    ["S","O","K"].forEach(e1 => {
+      ["S","O","K"].forEach(e2 => {
+        ["S","O","K"].forEach(e3 => {
+          var tmp = JSON.parse(JSON.stringify(_this.groups[0]));
+          var rand = function(n){
+              return Math.floor(Math.random() * n) + 1;
+          };
+          _this.groups.push(tmp);
+          _this.groups[_this.groups.length-1].name = e1+e2+e3;
+          _this.groups[_this.groups.length-1].chartdata.datasets[0].data = [rand(100),rand(100),rand(100),rand(100),rand(100)];
+          Object.assign(_this.groups[_this.groups.length-1],{options: _this.options});
+        });
+      });
+    });
+    this.groups.shift();
   }
 }
 </script>

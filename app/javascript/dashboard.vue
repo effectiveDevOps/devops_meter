@@ -2,10 +2,10 @@
 // https://vue-chartjs.org/ja/guide/#最初のチャートの作成
 <template>
   <div id="app">
-    <p>dashboard</p>
+    <h1>DevOps Score by Group</h1>
     <div class="container">
       <div v-for="(group,index) in groups" :key="index" class="each-group">
-        <p>{{ group.name }}</p>
+        <h3>{{ group.name }}</h3>
         <p>DevOps Score: {{group.score}}</p>
         <RadarChart :chartdata='group.chartdata' :options='group.options' />
       </div>
@@ -44,6 +44,9 @@ export default {
                 min: 0,
                 stepSize: 50
             }
+        },
+        legend: {
+              display: false
         }
       }
     }
@@ -59,24 +62,33 @@ export default {
               return Math.floor(Math.random() * n) + 1;
           };
           _this.groups.push(tmp);
+          //　creating demo data.
           _this.groups[_this.groups.length-1].name = e1+e2+e3;
           _this.groups[_this.groups.length-1].chartdata.datasets[0].data = [rand(100),rand(100),rand(100),rand(100),rand(100)];
+          var arr = _this.groups[_this.groups.length-1].chartdata.datasets[0].data;
+          _this.groups[_this.groups.length-1].chartdata.datasets[0].backgroundColor = 'hsla('+rand(360)+', 80%, 80%,0.2)';
+          _this.groups[_this.groups.length-1].score = (arr[0])*(arr[1]+arr[2]+arr[3]+arr[4])/4/100;
           Object.assign(_this.groups[_this.groups.length-1],{options: _this.options});
         });
       });
     });
     this.groups.shift();
+    this.groups.sort(function(l,r){return r.score - l.score;});
   }
 }
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
+h3, h1, p {
   text-align: center;
 }
+/* p {
+  font-size: 2em;
+  text-align: center;
+} */
 .each-group {
-  width: 400px;
+  width: 300px;
+  margin: 0px 30px;
 }
 .container {
   display: flex;

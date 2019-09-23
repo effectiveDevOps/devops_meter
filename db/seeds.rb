@@ -18,5 +18,6 @@ Question.create([
   ])
 
 Group.create([
-  { group_name: 'EcEx/Service Operation Kaizen Grp.'}
+  { group_name: 'EcEx/SOK'},
+  { group_name: 'EcEx/'}
   ])

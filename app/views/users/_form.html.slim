@@ -1,20 +1,25 @@
-= form_for(@user, url: 'users/', method: method) do |f|
-  label.control-label for=""  Nickname
-  = f.text_field :nickname, class: 'form-control'
-  label.control-label for=""  EmployeeNumber
-  = f.text_field :employee_number, class: 'form-control'
-  label.control-label for=""  GroupId
-  = f.collection_select :group_id, f.object.selectable_group, :id, :group_name, class: 'form-control'
+h1.text-center DevOps Meter
 
-  table.table-list
-    thead
-      tr
-        th Question[JP]
-        th Question[EN]
-        th Answer
-    tbody#answers
-      .form-group
-        = @questions.each do |question|
-          = f.fields_for :answers do |answer|
-            = render 'answers', f: answer, q: question
-  = f.submit 'Submit', class: 'btn btn-primary'
+.mx-4
+  = form_for(@user, url: 'users/', method: method) do |f|
+    label.control-label for=""  Nickname
+    = f.text_field :nickname, class: 'form-control'
+    label.control-label for=""  EmployeeNumber
+    = f.text_field :employee_number, class: 'form-control'
+    label.control-label for=""  GroupId
+    = f.collection_select :group_id, f.object.selectable_group, :id, :group_name, class: 'form-control'
+
+    .mx-5.contaier
+      table.table-list.table-striped.table-resposive
+        thead.table-dark
+          tr
+            th Question[JP]
+            th Question[EN]
+            th nowrap="nowrap" Answer(Min<->Max)
+        tbody#answer
+          - @questions.each do |question|
+            = f.fields_for :answers do |answer|
+              = render 'answers', f: answer, q: question
+    br
+    .col.text-center
+      = f.submit 'Submit', class: 'btn btn-primary'

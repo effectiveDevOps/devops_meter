@@ -19,7 +19,20 @@ Question.create([
   ])
 
 Group.create([
-  { group_name: 'EcEx/SOK'}
+  { group_name: 'EcEx/SOK' },
+  { group_name: 'EcEx/ReviewVideo' },
+  { group_name: 'EcEx/StartUp' },
+  { group_name: 'EcEx/Kaizen' },
+  { group_name: 'EcEx/Ranking' },
+  { group_name: 'C2C/ServiceApplication' },
+  { group_name: 'C2C/ServicePlatform' },
+  { group_name: 'C2C/ServiceDesign' },
+  { group_name: 'C2C/ServicePlanning' },
+  { group_name: 'C2C/ServiceInfra' },
+  { group_name: 'C2C/DevRelations' },
+  { group_name: 'OpenCom/Expansion' },
+  { group_name: 'OpenCom/Payment' },
+  { group_name: 'Auto/Car' }
   ])
 
 Category.create!([

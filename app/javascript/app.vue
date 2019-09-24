@@ -20,3 +20,10 @@ p {
   text-align: center;
 }
 </style>
+
+<script>
+  import Vue from 'vue'
+  import VueRouter from 'vue-router'
+
+  import creeateAnswer from 'createAnswer.vue'
+</script>

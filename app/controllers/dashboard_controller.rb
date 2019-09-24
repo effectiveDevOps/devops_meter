@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
-  def index
+  def index;end
+  def api
     render :json => {
       data: Group.all.map do |group|
         scores = Hash.new 0
@@ -17,10 +18,15 @@ class DashboardController < ApplicationController
         {
           name: group.group_name,
           score: (100-sd.mean) * scores.sum{|k,v|v}/Category.all.size/100,
-          lables: [ "シンクロ度", *Category.all.map(&:ja_desc) ],
-          datasets: [
-            data: [(100-sd.mean), *Category.all.map{ |e| scores[e.id] } ]
-          ]
+          chartdata: {
+            labels: [ "シンクロ度", *Category.all.map(&:ja_desc) ],
+            datasets: [
+              {
+                label: 'グループ平均',
+                data: [(100-sd.mean), *Category.all.map{ |e| scores[e.id] }]
+              }
+            ]
+          }
         }
       end
     }

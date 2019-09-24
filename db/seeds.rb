@@ -19,6 +19,13 @@ Question.create([
   ])
 
 Group.create([
-  { group_name: 'EcEx/SOK'},
-  { group_name: 'EcEx/'}
+  { group_name: 'EcEx/SOK'}
   ])
+
+Category.create!([
+  { id: 1, ja_desc: 'コラボレーション', en_desc: 'Collaboration' },
+  { id: 2, ja_desc: 'アフィニティ', en_desc: 'Affinity' },
+  { id: 3, ja_desc: 'ツール', en_desc: 'Tool' },
+  { id: 4, ja_desc: 'スケール', en_desc: 'Scaling' },
+  { id: 5, ja_desc: '非ロックスター度', en_desc: 'Anti-RockStar' },
+])

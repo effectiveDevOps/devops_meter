@@ -1,0 +1,61 @@
+<h1>DevOps Meter Result</h1>
+
+
+シンクロ率 <%= @synchronous_value %>
+
+<canvas id="myChart" width="750" height="500"></canvas>
+Your group average will be changed at each time your group members input answer.
+Let's introduce DevOps Meter to your members!
+
+<h4>Your Answer</h4>
+<%= @user_answers.inspect %>
+
+<script>
+    ctx = document.getElementById("myChart").getContext('2d');
+    new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['コラボレーション','アフィニティ','ツール','スケーリング','非ロックスター度'],
+            datasets: [{
+                label: "Your Answer",
+                data: <%= @user_results.values %>,
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(255, 50, 132)',
+                pointBackgroundColor : 'rgb(255, 99, 132)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(255, 99, 132)'
+            },{
+                label: "Your Group Average",
+                data: <%= @group_results.values %>,
+                fill: true,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235)',
+                pointBackgroundColor : 'rgb(54, 162, 235)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgb(54, 162, 235)'
+            }]
+        },
+    options: {
+            title:  {
+                display: true,
+                text: "Your DevOps Score Compared with Group AVG."
+            },
+            elements: {
+                line: {"tension":0,"borderWidth":3}
+            },
+            scale: {
+                min: 50,
+                max: 200,
+                scaleOverride : true,
+                scaleSteps : 1,
+                scaleStepWidth : 1,
+                scaleStartValue : 0
+            }
+        }
+    });
+</script>
+
+

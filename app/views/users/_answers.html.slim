@@ -1,0 +1,8 @@
+tr.nested-fields
+  = f.hidden_field :question_id, value: q.id
+  td
+    = q.ja_desc
+  td
+    = q.en_desc
+  td.text-center
+    = f.range_field :value, min:0, maxlength:10

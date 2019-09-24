@@ -1,5 +1,3 @@
-
-// https://vue-chartjs.org/ja/guide/#最初のチャートの作成
 <template>
   <div id="app">
     <h1>DevOps Score by Group</h1>

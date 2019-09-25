@@ -18,7 +18,7 @@ Question.create([
     inverse_flag: true },
   { category_id: 1,
     ja_desc: '私は、人のスキルや性質は生まれつきのもので変わらないと考える固定思考より、努力すればいつでも変わることができると考える成長思考を重視し、実践している。',
-    en_desc: 'I emphasize and practice "Growth Mindset" that people can change at any time rather than "Fixed Mindset" that human skills and nature are inherently invariant.'
+    en_desc: 'I emphasize and practice "Growth Mindset" that people can change at any time rather than "Fixed Mindset" that human skills and nature are inherently invariant.',
     inverse_flag: false },
   { category_id: 1,
     ja_desc: '私は、自分には自分の考え方があるが、他人にはそれぞれの経験やスキル、コンテキストから生まれた別の考え方があることを認め、受け入れて、建設的な議論が日々できている。',

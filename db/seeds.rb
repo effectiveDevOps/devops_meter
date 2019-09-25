@@ -107,7 +107,8 @@ Group.create([
   { group_name: 'C2C/DevRelations' },
   { group_name: 'OpenCom/Expansion' },
   { group_name: 'OpenCom/Payment' },
-  { group_name: 'Auto/Car' }
+  { group_name: 'Auto/Car' },
+  { group_name: 'Other' }
   ])
 
 Category.create!([

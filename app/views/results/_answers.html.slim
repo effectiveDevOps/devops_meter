@@ -3,9 +3,9 @@ h4 = params[:en] ? 'Your Answers' : 'あなたの回答'
   table.table-list.table-striped.table-resposive
     thead.table-dark
       tr
-        th nowrap="nowrap" = params[:en] ? 'Category' : 'カテゴリー'
-        th = params[:en] ? 'Question' : '質問'
-        th nowrap="nowrap" = params[:en] ? 'Your Answer' : '回答'
+        th nowrap="nowrap" = params[:en] ? 'Category' : 'カテゴリー:'
+        th = params[:en] ? 'Question' : '質問:'
+        th nowrap="nowrap" = params[:en] ? 'Your Answer' : '回答:'
     tbody#answer
       - @questions.zip(@user_answers) do |question, answer|
         = render 'answer', q: question, a: answer

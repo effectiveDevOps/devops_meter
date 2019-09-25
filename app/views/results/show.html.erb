@@ -8,7 +8,7 @@
     <% end %>
   </p>
 
-  <h4><%= params[:en] ? 'Result' : '結果' %></h4>
+  <h4><%= params[:en] == 'true' ? 'Result' : '結果' %></h4>
 
   <p class="text-center">Your Group Name: <%= @group.group_name %></p>
   <p class="text-center">Your Group Answers: <%= @group_member_count %></p>
@@ -37,7 +37,7 @@
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: <%= raw(Category.all.map(& params[:en] ? :en_desc : :ja_desc)) %>,
+            labels: <%= raw(Category.all.map(& params[:en] == 'true' ? :en_desc : :ja_desc)) %>,
             datasets: [{
                 label: "Your Answer",
                 data: <%= @user_results.values %>,

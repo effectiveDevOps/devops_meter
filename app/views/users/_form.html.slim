@@ -1,19 +1,24 @@
-.mx-4
+.mx-md-4
+  p.text-right.container
+    - if params[:en]
+      a href="/" Japanese
+    - else
+      a href="/?en=true" English
   = form_for(@user, url: 'users/', method: method) do |f|
-    label.control-label for=""  Nickname
-    = f.text_field :nickname, class: 'form-control'
-    label.control-label for=""  EmployeeNumber
-    = f.text_field :employee_number, class: 'form-control'
-    label.control-label for=""  GroupId
-    = f.collection_select :group_id, f.object.selectable_group, :id, :group_name, class: 'form-control'
+    .container
+      label.control-label for=""  Nickname
+      = f.text_field :nickname, class: 'form-control', required: true
+      label.control-label for=""  EmployeeNumber
+      = f.number_field :employee_number, class: 'form-control', required: true
+      label.control-label for=""  GroupId
+      = f.collection_select :group_id, f.object.selectable_group, :id, :group_name, class: 'form-control'
 
-    .mx-5.contaier
+    .container
       table.table-list.table-striped.table-resposive
         thead.table-dark
           tr
-            th Question[JP]
-            th Question[EN]
-            th nowrap="nowrap" Answer(Min<->Max)
+            th Question
+            th nowrap="nowrap" Answer( No --> Yes )
         tbody#answer
           - @questions.each do |question|
             = f.fields_for :answers do |answer|

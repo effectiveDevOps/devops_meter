@@ -7,6 +7,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Category.create!([
+  { id: 1, ja_desc: 'コラボレーション', en_desc: 'Collaboration' },
+  { id: 2, ja_desc: 'アフィニティ', en_desc: 'Affinity' },
+  { id: 3, ja_desc: 'ツール', en_desc: 'Tool' },
+  { id: 4, ja_desc: 'スケール', en_desc: 'Scaling' },
+  { id: 5, ja_desc: '非ロックスター度', en_desc: 'Anti-RockStar' },
+])
+
 Question.create([
   { category_id: 1,
     ja_desc: '私のチームは心理的安全性が高く、何かミスやトラブルがあっても特定の個人を非難しない。それを学習の機会と捉えて再発防止のための仕組みづくりについてはなし合う文化がある',
@@ -111,10 +119,3 @@ Group.create([
   { group_name: 'Other' }
   ])
 
-Category.create!([
-  { id: 1, ja_desc: 'コラボレーション', en_desc: 'Collaboration' },
-  { id: 2, ja_desc: 'アフィニティ', en_desc: 'Affinity' },
-  { id: 3, ja_desc: 'ツール', en_desc: 'Tool' },
-  { id: 4, ja_desc: 'スケール', en_desc: 'Scaling' },
-  { id: 5, ja_desc: '非ロックスター度', en_desc: 'Anti-RockStar' },
-])

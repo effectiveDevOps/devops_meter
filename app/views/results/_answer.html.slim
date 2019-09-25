@@ -1,0 +1,7 @@
+tr
+  td nowrap="nowrap"
+    = params[:en] ? @categories.find_by(id: q.category_id).en_desc : @categories.find_by(id: q.category_id).ja_desc
+  td
+    = params[:en] ? q.en_desc : q.ja_desc
+  td.text-center
+    = a.value

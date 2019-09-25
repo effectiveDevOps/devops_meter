@@ -1,21 +1,43 @@
-<h1>DevOps Meter Result</h1>
+<div class="container">
+  <hr/>
+  <p class="text-right">
+    <% if params[:en] == 'true' %>
+      <a href='/results/?user_id=<%= params[:user_id] %>'>Japanese</a>
+    <% else %>
+      <a href='/results/?user_id=<%= params[:user_id] %>&en=true'>English</a>
+    <% end %>
+  </p>
 
+  <h4><%= params[:en] ? 'Result' : '結果' %></h4>
 
-シンクロ率 <%= @synchronous_value %>
+  <p class="text-center">Your Group Name: <%= @group.group_name %></p>
+  <p class="text-center">Your Group Answers: <%= @group_member_count %></p>
 
-<canvas id="myChart" width="750" height="500"></canvas>
-Your group average will be changed at each time your group members input answer.
-Let's introduce DevOps Meter to your members!
+  <canvas id="myChart" width="750" height="500"></canvas>
+  <% if params[:en] == 'true' %>
+    <p>* Your group average will be changed at each time your group members input answer.<br>
+      Let's introduce DevOps Meter to your members!
+    </p>
+    <%= render 'results/en_description' %>
+  <% else %>
+    <p>* グループ平均は、あなた方のグループのメンバーが入力するたびに更新されます！<br>
+      あなたのグループの人にもDevOps Meterを紹介しよう！
+    </p>
+    <%= render 'results/ja_description' %>
+  <% end %>
 
-<h4>Your Answer</h4>
-<%= @user_answers.inspect %>
+  <%= render 'results/affiliate' %>
+  <%= render 'results/answers' %>
+  <%= render 'results/affiliate' %>
+</div>
+
 
 <script>
     ctx = document.getElementById("myChart").getContext('2d');
     new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: ['コラボレーション','アフィニティ','ツール','スケーリング','非ロックスター度'],
+            labels: <%= raw(Category.all.map(& params[:en] ? :en_desc : :ja_desc)) %>,
             datasets: [{
                 label: "Your Answer",
                 data: <%= @user_results.values %>,
@@ -38,7 +60,7 @@ Let's introduce DevOps Meter to your members!
                 pointHoverBorderColor: 'rgb(54, 162, 235)'
             }]
         },
-    options: {
+        options: {
             title:  {
                 display: true,
                 text: "Your DevOps Score Compared with Group AVG."
@@ -47,15 +69,13 @@ Let's introduce DevOps Meter to your members!
                 line: {"tension":0,"borderWidth":3}
             },
             scale: {
-                min: 50,
-                max: 200,
-                scaleOverride : true,
-                scaleSteps : 1,
-                scaleStepWidth : 1,
-                scaleStartValue : 0
+                ticks: {
+                    beginAtZero: true,
+                    max: 100,
+                    min: 0,
+                    stepSize: 20
+                }
             }
         }
     });
 </script>
-
-

@@ -7,9 +7,12 @@ class ResultsController < ApplicationController
     @group = Group.find_by(id: @user.group_id)
     @user_results = Hash.new {0}
     @group_results = Hash.new {0}
+    @questions = Question.all
+    @categories = Category.all
+
     sum_deviation = 0
 
-    Question.all.each do |q|
+    @questions.each do |q|
       # ユーザの回答した値を取得
       value = q.answers.find_by( user_id: user_id ).value
       user_value = q.inverse_flag ? 100 - value : value
@@ -20,25 +23,27 @@ class ResultsController < ApplicationController
       end
 
       # カテゴリごとに集計する。
-      @user_results[q.category_id] += ( user_value / Category.all.size )
-      @group_results[q.category_id] += ( group_values.average / Category.all.size )
+      @user_results[q.category_id] += ( user_value / @categories.size )
+      @group_results[q.category_id] += ( group_values.average / @categories.size )
 
       # 偏差の総和
       sum_deviation += (user_value - group_values.average).abs
+      @group_member_count = group_values.size
     end
 
     # ユーザとユーザの所属するグループ平均とのシンクロ度合い（％）
-    # TODO 個人の結果画面にシンクロ度合いって出すのかしら？(計算怪しい)
-    @synchronous_value = 100 - ( sum_deviation / Question.all.size )
+    # TODO 今は表示していない。
+    @synchronous_value = 100 - ( sum_deviation / @categories.size )
 
-    pp @group
-    pp @user
-    pp @user_results
-    pp @group_results
-    pp @synchronous_value
-
-    pp @user_answers
+    # pp @group
+    # pp @user
+    # pp @user_results
+    # pp @group_results
+    # pp @synchronous_value
+    # pp @user_answers
+    pp @categories
   end
+
 end
 
 class Array

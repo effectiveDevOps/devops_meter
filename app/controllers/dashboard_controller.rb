@@ -3,27 +3,27 @@ class DashboardController < ApplicationController
   def api
     render :json => {
       data: Group.all.map do |group|
-        scores = Hash.new 0
+        scores = {}
+        Category.all.map{|e| scores[e.id]= []}
         sd = []
+        user_ids = group.users.map(&:id)
         Question.all.each do |question|
-          pp question
           # 各問のフラグを取り除いた得点の配列
-          score = question.answers.where( user_id: group.users.map(&:id) ).map do |answer|
+          score = question.answers.where( user_id: user_ids ).map do |answer|
             question.inverse_flag ? 100 - answer.value : answer.value
           end
-          pp score
-          scores[question.category_id] += score.mean
+          scores[question.category_id] << score.mean
           sd << score.sd
         end
         {
           name: group.group_name,
-          score: (100-sd.mean) * scores.sum{|k,v|v}/Category.all.size/100,
+          score: ((100-sd.mean) * Category.all.map{ |e| pp scores[e.id].mean }.sum/Category.all.size/100).round(3),
           chartdata: {
             labels: [ "シンクロ度", *Category.all.map(&:ja_desc) ],
             datasets: [
               {
                 label: 'グループ平均',
-                data: [(100-sd.mean), *Category.all.map{ |e| scores[e.id] }]
+                data: [(100-sd.mean), *Category.all.map{ |e| scores[e.id].mean }]
               }
             ]
           }
@@ -40,8 +40,9 @@ class Array
   end
 
   def var
+    return 0 if size-1 <= 0
     m = mean
-    reduce(0) { |a,b| a + (b - m) ** 2 } / (size - 1)
+    reduce(0) { |a,b| a + (b - m) ** 2 } / (size)
   end
 
   def sd

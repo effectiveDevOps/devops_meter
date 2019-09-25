@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
           name: group.group_name,
           score: ((100-sd.mean) * Category.all.map{ |e| pp scores[e.id].mean }.sum/Category.all.size/100).round(3),
           chartdata: {
-            labels: [ "シンクロ度", *Category.all.map(&:ja_desc) ],
+            labels: [ "Synchro", *Category.all.map(&:en_desc) ],
             datasets: [
               {
                 label: 'グループ平均',

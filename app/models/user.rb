@@ -5,4 +5,6 @@ class User < ApplicationRecord
   has_many :questions, through: :answers
 
   accepts_nested_attributes_for :answers
+
+  validates :employee_number, uniqueness: true
 end

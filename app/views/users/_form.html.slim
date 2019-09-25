@@ -4,7 +4,7 @@
       a href="/" Japanese
     - else
       a href="/?en=true" English
-  = form_for(@user, url: 'users/', method: method) do |f|
+  = form_for(@user, url: "users/?en=#{params[:en]}", method: method) do |f|
     .container
       label.control-label for=""  Nickname
       = f.text_field :nickname, class: 'form-control', required: true

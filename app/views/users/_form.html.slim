@@ -1,12 +1,9 @@
-h1.text-center DevOps Meter
-
 .mx-md-4
   p.text-right.container
     - if params[:en]
       a href="/" Japanese
     - else
       a href="/?en=true" English
-
   = form_for(@user, url: 'users/', method: method) do |f|
     .container
       label.control-label for=""  Nickname

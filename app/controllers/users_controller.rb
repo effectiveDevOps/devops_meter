@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     @user = Form::User.new(user_params)
     if @user.save
-      redirect_to "/results?user_id=#{@user.id}&en=#{params[:en]}"
+      redirect_to "/results?en=#{params[:en]}&token=#{token(@user.id)}"
     end
   end
 

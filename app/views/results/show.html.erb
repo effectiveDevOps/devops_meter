@@ -1,28 +1,46 @@
 <div class="container">
   <hr/>
-  <p class="text-right">
-    <% if params[:en] == 'true' %>
-      <a href='/results/?user_id=<%= params[:user_id] %>'>Japanese</a>
-    <% else %>
-      <a href='/results/?user_id=<%= params[:user_id] %>&en=true'>English</a>
-    <% end %>
-  </p>
-
-  <h4><%= params[:en] == 'true' ? 'Result' : '結果' %></h4>
-
-  <p class="text-center">Your Group Name: <%= @group.group_name %></p>
-  <p class="text-center">Your Group Answers: <%= @group_member_count %></p>
-
-  <canvas id="myChart" width="750" height="500"></canvas>
   <% if params[:en] == 'true' %>
+    <p class="text-right">
+      <a href='/results/?user_id=<%= params[:user_id] %>'>Japanese</a>
+    </p>
+
+    <h4>Result</h4>
+    <p class="text-center">Your Group Name: <%= @group.group_name %></p>
+    <p class="text-center">Your Group Answers: <%= @group_member_count %></p>
+    <br>
+
+    <div class="text-center">
+      <canvas id="myChart" width="600"></canvas>
+    </div>
+    <br>
+
     <p>* Your group average will be changed at each time your group members input answer.<br>
       Let's introduce DevOps Meter to your members!
     </p>
+    <br>
+
     <%= render 'results/en_description' %>
   <% else %>
+    <p class="text-right">
+      <a href='/results/?user_id=<%= params[:user_id] %>&en=true'>English</a>
+    </p>
+
+    <h4>結果</h4>
+    <p class="text-center">あなたのグループ名: <%= @group.group_name %></p>
+    <p class="text-center">あなたのグループの回答者数: <%= @group_member_count %></p>
+    <br>
+
+    <div class="text-center">
+      <canvas id="myChart" width="600"></canvas>
+    </div>
+    <br>
+
     <p>* グループ平均は、あなた方のグループのメンバーが入力するたびに更新されます！<br>
       あなたのグループの人にもDevOps Meterを紹介しよう！
     </p>
+    <br>
+
     <%= render 'results/ja_description' %>
   <% end %>
 

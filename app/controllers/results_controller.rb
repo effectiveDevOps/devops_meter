@@ -1,9 +1,9 @@
 class ResultsController < ApplicationController
   def show
-    user_id = params[:user_id]
+    @user_id = convert_to_id(params[:token])
 
-    @user = User.find_by(id: params[:user_id])
-    @user_answers = Answer.where(user_id: @user.id)
+    @user = User.find_by(id: @user_id)
+    @user_answers = Answer.where(user_id: @user_id)
     @group = Group.find_by(id: @user.group_id)
     @user_results = Hash.new {0}
     @group_results = Hash.new {0}
@@ -14,7 +14,7 @@ class ResultsController < ApplicationController
 
     @questions.each do |q|
       # ユーザの回答した値を取得
-      value = q.answers.find_by( user_id: user_id ).value
+      value = q.answers.find_by( user_id: @user_id ).value
       user_value = q.inverse_flag ? 100 - value : value
 
       # ユーザが所属しているグループの値を取得
@@ -41,7 +41,7 @@ class ResultsController < ApplicationController
     # pp @group_results
     # pp @synchronous_value
     # pp @user_answers
-    pp @categories
+    # pp @categories
   end
 
 end
